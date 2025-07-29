@@ -53,6 +53,21 @@ int main() {
                     k++;
                 } while (k <= casas);
                 break;
+
+            case 4:
+            nomePeca = "Cavalo";
+            casas = 1; //aqui informa a quantidade de casas que a peça vai andar
+            printf("Movendo %s casas:\n", nomePeca);
+            int l = 1;
+            while(l<= casas){
+                for(int l=1; l<3; l++){
+                    printf("%d° movimento para cima\n", l);
+                }
+            
+                printf("%d° movimento para a direita\n", l);
+                l++;
+                }
+                break;
                 
             default:
                 nomePeca = "Peça desconhecida";
