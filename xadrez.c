@@ -61,10 +61,10 @@ int main() {
             int l = 1;
             while(l<= casas){
                 for(int l=1; l<3; l++){
-                    printf("%d° movimento para cima\n", l);
+                    printf("%d° movimento para baixo\n", l);
                 }
             
-                printf("%d° movimento para a direita\n", l);
+                printf("%d° movimento para a esquerda\n", l);
                 l++;
                 }
                 break;
