@@ -13,10 +13,11 @@ int main() {
             printf("1 - Torre\n");
             printf("2 - Rainha\n");
             printf("3 - Bispo\n");
-            printf("Escolha uma peça (1-3): ");
+            printf("4 - Cavalo\n");
+            printf("Escolha uma peça (1-4): ");
             scanf("%d", &escolha);
 
-            if (escolha >= 1 && escolha <= 3)
+            if (escolha >= 1 && escolha <= 4)
                 break;
             printf("Escolha inválida! Tente novamente.\n\n");
         }
@@ -52,7 +53,7 @@ int main() {
                     k++;
                 } while (k <= casas);
                 break;
-
+                
             default:
                 nomePeca = "Peça desconhecida";
                 printf("Escolha inválida!\n");
