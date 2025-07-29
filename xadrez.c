@@ -1,11 +1,13 @@
 #include <stdio.h>
 
 int main() {
-    int escolha, casas;
+    int escolha;
+    char *nomePeca;
+    int casas;
     char continuar;
 
     do {
-        // Menu para escolher a peça (while para validação)
+        // Menu para escolha da peça (com validação simples)
         while (1) {
             printf("=== MENU PRINCIPAL ===\n");
             printf("1 - Torre\n");
@@ -16,59 +18,55 @@ int main() {
 
             if (escolha >= 1 && escolha <= 3)
                 break;
-            printf("Escolha inválida! Tente novamente.\n");
+            printf("Escolha inválida! Tente novamente.\n\n");
         }
 
-        // Validação da quantidade de casas para mover (do while)
-        do {
-            printf("Digite quantas casas deseja mover (1 a 5): ");
-            scanf("%d", &casas);
-            if (casas < 1 || casas > 5)
-                printf("Valor inválido! Digite novamente.\n");
-        } while (casas < 1 || casas > 5);
-
-        // Escolhendo nome da peça para exibir mensagem
-        char *nomePeca;
         switch (escolha) {
-            case 1:
+            case 1: // Torre - for
                 nomePeca = "Torre";
-                break;
-            case 2:
-                nomePeca = "Rainha";
-                break;
-            case 3:
-                nomePeca = "Bispo";
-                break;
-            default:
-                nomePeca = "Peça Desconhecida";
-                break;
-        }
-
-        printf("Movendo %s %d casa(s):\n", nomePeca, casas);
-
-        // For para repetir o número de casas com movimentos exclusivos por peça
-        for (int i = 1; i <= casas; i++) {
-            switch (escolha) {
-                case 1: // Torre - movimento direita (Ex: sempre "para direita")
+                casas = 5;
+                printf("Movendo %s %d casa(s):\n", nomePeca, casas);
+                for (int i = 1; i <= casas; i++) {
                     printf("%d° movimento: Movimento reto para direita\n", i);
-                    break;
-                case 2: // Rainha - pode mover em qualquer direção
-                    printf("%d° movimento: Movimento para a direita\n", i);
-                    break;
-                case 3: // Bispo - movimento diagonal
-                    printf("%d° movimento: Movimento para cima e direita (diagonal)\n", i);
-                    break;
-            }
+                }
+                break;
+
+            case 2: // Rainha - while
+                nomePeca = "Rainha";
+                casas = 8; // 8 casas para a Rainha
+                printf("Movendo %s %d casa(s):\n", nomePeca, casas);
+                int j = 1;
+                while (j <= casas) {
+                    printf("%d° movimento: Movimento reto para esquerda\n", j);
+                    j++;
+                }
+                break;
+
+            case 3: // Bispo - do-while
+                nomePeca = "Bispo";
+                casas = 5;
+                printf("Movendo %s %d casa(s):\n", nomePeca, casas);
+                int k = 1;
+                do {
+                    printf("%d° movimento: Movimento para cima e direita (diagonal)\n", k);
+                    k++;
+                } while (k <= casas);
+                break;
+
+            default:
+                nomePeca = "Peça desconhecida";
+                printf("Escolha inválida!\n");
+                break;
         }
 
-        // Pergunta se quer continuar jogando
-        printf("Deseja mover outra peça? (s/n): ");
-        // espaço antes de %c para consumir qualquer \n remanescente
+        // Perguntar se usuário deseja continuar com outra jogada
+        printf("\nDeseja mover outra peça? (s/n): ");
         scanf(" %c", &continuar);
+
+        printf("\n");
 
     } while (continuar == 's' || continuar == 'S');
 
     printf("Jogo encerrado. Obrigado por jogar!\n");
-
     return 0;
 }
