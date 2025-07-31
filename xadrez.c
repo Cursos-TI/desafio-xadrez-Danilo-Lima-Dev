@@ -14,22 +14,7 @@ void moverRainha(int movimento, int casas) {
     moverRainha(movimento + 1, casas);
 }
 
-// Função recursiva para mover o Bispo diagonal (alto e direita)
-// e também implementa loops aninhados: externo para vertical, interno para horizontal
-void moverBispoRecursivoComLoops(int v, int maxV, int h, int maxH) {
-    if (v > maxV) return;
-
-    if (h > maxH) {
-        // Quando termina o loop horizontal, recursa para o próximo vertical
-        moverBispoRecursivoComLoops(v + 1, maxV, 1, maxH);
-        return;
-    }
-
-    printf("%d° movimento: Movimento para cima e direita (diagonal) - v=%d h=%d\n", (v + h - 1), v, h);
-    moverBispoRecursivoComLoops(v, maxV, h + 1, maxH);
-}
-
-// Função recursiva simples para Bispo (substitui o do-while original)
+// Função recursiva simples para Bispo (substitui os loops simples originais)
 void moverBispo(int movimento, int casas) {
     if (movimento > casas) return;
     printf("%d° movimento: Movimento para cima e direita (diagonal)\n", movimento);
@@ -44,13 +29,10 @@ void moverCavalo(int movimentos) {
         // Loop externo: movimento vertical, duas casas para cima
         for (int j = 1; j <= 2; j++) {
             printf("%d° movimento: Movimento para cima\n", count++);
-            // Exemplo de uso de continue: se quiser pular algo, mas aqui só demonstra
-            if (j == 1) continue;  // apenas demonstração; continue não é necessário aqui
+            if (j == 1) continue;  // demonstração de continue
         }
-        // Loop interno: movimento horizontal, uma casa para direita
+        // Movimento horizontal: uma casa para direita
         printf("%d° movimento: Movimento para direita\n", count++);
-        // Exemplo de break para controlar fluxo (não usado na prática aqui, só ilustração)
-        // if (count > movimentos*3) break;
     }
 }
 
@@ -68,7 +50,7 @@ int main() {
             printf("2 - Rainha\n");
             printf("3 - Bispo\n");
             printf("4 - Cavalo\n");
-            printf("Escolha uma peça (1-4): \n");
+            printf("Escolha uma peça (1-4): ");
             scanf("%d", &escolha);
 
             if (escolha >= 1 && escolha <= 4)
@@ -91,18 +73,16 @@ int main() {
                 moverRainha(1, casas);
                 break;
 
-            case 3: // Bispo - função recursiva com loops aninhados demonstrada
+            case 3: // Bispo - função recursiva simples
                 nomePeca = "Bispo";
-                casas = 3; // menor valor para loops aninhados
-                printf("Movendo %s (recursivo com loops aninhados) %d casa(s):\n", nomePeca, casas);
-                moverBispoRecursivoComLoops(1, casas, 1, casas);
-                // Também pode usar a versão simples recursiva abaixo:
-                // moverBispo(1, casas);
+                casas = 5;
+                printf("Movendo %s %d casa(s) na diagonal (cima e direita):\n", nomePeca, casas);
+                moverBispo(1, casas);
                 break;
 
             case 4: // Cavalo com loops aninhados
                 nomePeca = "Cavalo";
-                casas = 2; // número de movimentos L que o cavalo irá fazer
+                casas = 2;
                 printf("Movendo %s %d movimento(s) em 'L' para cima e para direita:\n", nomePeca, casas);
                 moverCavalo(casas);
                 break;
@@ -113,7 +93,6 @@ int main() {
                 break;
         }
 
-        // Perguntar se usuário deseja continuar com outra jogada
         printf("\nDeseja mover outra peça? (s/n): ");
         scanf(" %c", &continuar);
 
